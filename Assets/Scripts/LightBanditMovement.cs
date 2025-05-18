@@ -6,7 +6,7 @@ public class LightBanditMovement : MonoBehaviour
     public float speed = 5f;
     public float jumpArcHeight = 2f; // Desired jump arc height
     public LayerMask groundLayer;
-
+    public int damage = 1;
     private Rigidbody2D rb;
     private bool isGrounded;
     private bool shouldJump;
