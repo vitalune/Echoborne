@@ -22,6 +22,12 @@ public class playerMovement : MonoBehaviour
     public float baseGravity = 2;
     public float maxFallSpeed = 18f;
     public float fallSpeedMultiplier = 2f;
+
+    [Header("Attack")]
+    public Transform attackPoint;
+    public float radius = 0.5f;
+    public LayerMask Enemy;
+    public int playerAttackDamage = 1;
     void Start()
     {
         
@@ -82,5 +88,14 @@ public class playerMovement : MonoBehaviour
     {
         Gizmos.color = Color.white;
         Gizmos.DrawWireCube(groundCheckPos.position, groundCheckSize);
+        Gizmos.DrawWireSphere(attackPoint.transform.position, radius);
+    }
+    public void Attack()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, Enemy);
+        foreach (Collider2D Enemy in enemy)
+        {
+            Debug.Log("Hit " + Enemy.name);
+        }
     }
 }

@@ -39,5 +39,10 @@ public class PlayerAnimationController : MonoBehaviour
             // Face left but preserve scale
             transform.localScale = new Vector3(-originalScaleX, transform.localScale.y, transform.localScale.z);
         }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            animator.SetTrigger("isAttacking");
+        }
     }
 }
