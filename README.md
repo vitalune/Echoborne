@@ -3,6 +3,8 @@
 ## Overview
 **Echoborne** is a 2D platformer game demo built in Unity. You play as a sound-based creature navigating a quiet forest world. The game is designed as a learning project to explore core game development mechanics, including movement, combat, UI, and item collection.
 
+![gameplay demo image](echobornedemoimg)
+
 ### 🎮 Demo Features
 The current demo includes:
 - A responsive **movement system** (running, jumping, turning)
