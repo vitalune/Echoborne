@@ -23,11 +23,26 @@ public class playerHealth : MonoBehaviour
         LightBanditMovement bandit = collision.gameObject.GetComponent<LightBanditMovement>();
         if (bandit != null)
         {
+            // Set the bandit's attack animation
+            Animator LightBanditAnimator = collision.gameObject.GetComponent<Animator>();
+            if (LightBanditAnimator != null)
+            {
+                LightBanditAnimator.SetBool("isAttacking", true);
+                StartCoroutine(ResetIsAttacking(LightBanditAnimator, 0.5f));
+            }
+
             // The object is a bandit, so take damage
             TakeDamage(bandit.damage);
         }
     }
-
+    private IEnumerator ResetIsAttacking(Animator LightBanditAnimator, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (LightBanditAnimator != null)
+        {
+            LightBanditAnimator.SetBool("isAttacking", false);
+        }
+    }
     private void TakeDamage(int damage)
     {
         currentHealth -= damage;

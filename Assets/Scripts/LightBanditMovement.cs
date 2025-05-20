@@ -12,6 +12,10 @@ public class LightBanditMovement : MonoBehaviour
     private bool shouldJump;
     private Vector2 jumpTarget;
     private Vector2 calculatedJumpVelocity;
+    private float lastDirection = 1f;
+    private float previousX;
+    private float previousY;
+    private Animator animator;
 
     // Checks if the bandit is on the ground
     private bool GroundCheck()
@@ -23,6 +27,9 @@ public class LightBanditMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        previousX = transform.position.x;
+        previousY = transform.position.y;
     }
 
     // Update is called once per frame
@@ -31,6 +38,15 @@ public class LightBanditMovement : MonoBehaviour
         isGrounded = GroundCheck();
         float direction = Mathf.Sign(player.position.x - transform.position.x);
         bool isPlayerAbove = Physics2D.Raycast(transform.position, Vector2.up, 3f, 1 << player.gameObject.layer);
+
+        // Flip sprite if direction changes
+        if (direction != 0 && direction != lastDirection)
+        {
+            Vector3 scale = transform.localScale;
+            scale.x = Mathf.Abs(scale.x) * -direction;
+            transform.localScale = scale;
+            lastDirection = direction;
+        }
 
         if (isGrounded)
         {
@@ -58,6 +74,26 @@ public class LightBanditMovement : MonoBehaviour
                 shouldJump = true;
             }
         }
+
+        // Set isRunning to true if x is changing, false otherwise
+        if (animator != null)
+        {
+            bool isRunning = Mathf.Abs(transform.position.x - previousX) > 0.01f;
+            animator.SetBool("isRunning", true);
+
+            // Set isJumping to true if y is changing, false otherwise, but set to false if isGrounded
+            bool isJumping = Mathf.Abs(transform.position.y - previousY) > 0.01f;
+            if (isGrounded)
+            {
+                animator.SetBool("isJumping", false);
+            }
+            else
+            {
+                animator.SetBool("isJumping", true);
+            }
+        }
+        previousX = transform.position.x;
+        previousY = transform.position.y;
     }
 
     private void FixedUpdate()
