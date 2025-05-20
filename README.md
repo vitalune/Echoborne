@@ -95,17 +95,6 @@ Planned features for future development:
 
 ---
 
-## 🔮 Future Goals
-- Implement sound-based puzzle mechanics (thematic core)
-- Add multiple enemy types with unique behaviors
-- Introduce a scoring and combo system
-- Build multiple forest-themed levels
-- Add sound effects, music, and audio cues
-- Implement save/load functionality
-- Polish visual effects and game feel
-
----
-
 ## 🧪 Development Environment
 
 - Unity Version: Unity 6.1
