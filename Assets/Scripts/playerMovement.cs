@@ -95,7 +95,8 @@ public class playerMovement : MonoBehaviour
         Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, Enemy);
         foreach (Collider2D Enemy in enemy)
         {
-            Debug.Log("Hit " + Enemy.name);
+            Debug.Log("Hit " + Enemy.name); 
+            Enemy.GetComponent<LightBanditHealth>().health -= playerAttackDamage;
         }
     }
 }
